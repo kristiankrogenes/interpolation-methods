@@ -45,7 +45,9 @@ def CubicSpline(x_obs, y_obs, N0, Nn, choice):
                 ABC[i][i+1] = abc[i][2]
 
     if choiceA:
+        print("INV", np.linalg.inv(ABC))
         N = list(np.dot(np.linalg.inv(ABC), d[:, np.newaxis]).flatten())
+        print("N first", N)
         N = np.array([N0] + N + [Nn])
         print("N with boundaries: \n", N)
     else:
@@ -71,10 +73,10 @@ def CubicSpline(x_obs, y_obs, N0, Nn, choice):
 
 if __name__ == '__main__':
 
-    choiceA = False
+    choiceA = True
     # x_obs, y_obs = DatasetGenerator().generate_random_xy_values(-10, 10, -10, 10, 100, 8)
-    x_obs, y_obs = [-1, 0, 2, 5, 9], [1, 2, -1, 0, 6]
-    boundary_conditions = [0, 0]
+    x_obs, y_obs = [0, 1, 2], [4/6, 1/6, 0]
+    boundary_conditions = [0,0]
 
     coeffs = CubicSpline(x_obs, y_obs, boundary_conditions[0], boundary_conditions[1], choiceA)
 

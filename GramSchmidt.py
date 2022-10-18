@@ -35,7 +35,7 @@ def GramSchmidt(A):
 
 def LSM_GramSchmidt(x_data, y_data, p):
     A = np.array([np.array(x_data)**i for i in range(p+1)]).T
-    b =  y_data[:, np.newaxis]
+    b = np.vstack(y_data)
     P, S = GramSchmidt(A)
     D = np.vstack([np.dot(pi, y_data)/np.dot(pi, pi) for pi in P.T])
 
@@ -44,7 +44,7 @@ def LSM_GramSchmidt(x_data, y_data, p):
     print("A: \n", A, "\n")
     print("b: \n", b, "\n")
     print("P: \n", P, "\n")
-    print("S: \n", S, "\n")
+    print("S: \n", S, "\n", np.linalg.inv(S), "\n")
     print("D: \n", D, "\n")
     print("Coeffs: \n", c, "\n")
 
@@ -59,12 +59,12 @@ def interpolate(x_obs, y_obs, poly_deg):
 if __name__ == '__main__':
 
     # // SET PARAMETERS HERE // 
-    poly_deg = 2
+    poly_deg = 1
     # x_dist = np.linspace(-1, 4, 100)
     # original_coeffs = DatasetGenerator().generate_random_polynomial(2)
     # x_obs, y_obs = DatasetGenerator().get_random_points_from_polynomial_with_noise(original_coeffs, np.linspace(-10, 10, 101), 100)
-    x_obs, y_obs = np.array([0, 1, 2, 3, 4]), np.array([0, 1, 4, 7, 0])
-    # A = np.array([[1, 1, 1, 1], [0, 2, 2, 0], [1, 0, -1, 0]]).T
+    x_obs, y_obs = np.array([0, 1, 2]), np.array([4/6, 1/6, 0])
+    # A = np.array([[1, 1, 1], [0, 1, 2]]).T
     # // ========================
 
     interpolate(x_obs, y_obs, poly_deg)

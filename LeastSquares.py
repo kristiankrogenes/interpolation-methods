@@ -8,6 +8,9 @@ def LeastSquaresMethod(x_data, y_data, p):
     A = np.array([np.array(x_data)**i for i in p]).T
     f = np.vstack(y_data)
     coeffs = np.linalg.inv(A.T @ A) @ A.T @ f
+    print("A: \n", A)
+    print("f: \n", f)
+    # print("(AT A)^-1", np.linalg.inv(A.T @ A))
     return coeffs.flatten()
 
 def interpolate(x_obs, y_obs, monomials):
@@ -22,12 +25,12 @@ def interpolate(x_obs, y_obs, monomials):
 if __name__ == '__main__':
 
     # // SET PARAMETERS HERE // ===================
-    monomials=[i for i in range(4)]
+    monomials=[i for i in range(2)]
     n=50
     # interval = np.linspace(-10, 10, 101)
     # coeffs = DatasetGenerator().generate_random_polynomial(len(monomials)-1)
     # x_obs, y_obs = DatasetGenerator().get_random_points_from_polynomial_with_noise(coeffs, interval, n)
-    x_obs, y_obs = [1, 2, 4, 8, 13, 22], [2, 5, 8, 22, 27, 2]
+    x_obs, y_obs = [0, 1, 2], [4/6, 1/6, 0]
     # // ==========================================
     interpolate(x_obs, y_obs, monomials)
 

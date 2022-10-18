@@ -21,10 +21,7 @@ def Lagrange(x, y, interval):
 def LagrangeCoeffs(x, y):
     P = []
     for i in range(len(x)):
-        pi = []
-        for j in range(len(x)):
-            if i != j:
-                pi.append(np.poly1d([1/(x[i]-x[j]), -x[j]/(x[i]-x[j])]))
+        pi = [np.poly1d([1/(x[i]-x[j]), -x[j]/(x[i]-x[j])]) for j in range(len(x)) if j != i] 
         p = 1
         for n in range(len(pi)):
             p *= pi[n]
@@ -51,7 +48,7 @@ if __name__ == '__main__':
     # x_obs, y_obs = DatasetGenerator().get_random_points_from_polynomial(coeffs, interval, len(coeffs))
     # // ==========================================
 
-    x_obs = np.array([-2, 0, 2])
-    y_obs = np.array([0, 4/6, 0])
+    x_obs = np.array([0, 1, 2])
+    y_obs = np.array([4/6, 1/6, 0])
 
     interpolate(x_obs, y_obs)
